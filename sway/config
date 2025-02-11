@@ -231,7 +231,7 @@ bindsym $mod+r mode "resize"
 #No titlebars
 #
 default_border pixel 2
-gaps inner 10
+gaps inner 5
 
 #
 # Font
