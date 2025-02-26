@@ -228,6 +228,14 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 #
+# Change layouts
+#	
+ input * {
+  xkb_layout us,ru
+  xkb_options grp:shifts_toggle
+ }
+
+#
 #No titlebars
 #
 default_border pixel 2
