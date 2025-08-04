@@ -25,6 +25,10 @@ set $menu bemenu-run -i -l 20 --fb "#282C34" --ff "#abb2bf" --nb "#282C34" --nf 
 exec_always --no-startup-id autotiling
 exec_always --no-startup-id waybar
 
+# Disable swayidle for fullscreen
+for_window [class="^.*"] inhibit_idle fullscreen
+for_window [app_id="^.*"] inhibit_idle fullscreen
+
 # Assign workspaces
 #assign [app_id="vesktop"] 3
 #assign [app_id="code"] 2
