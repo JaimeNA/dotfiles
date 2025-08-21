@@ -1,3 +1,7 @@
+@import "./rose-pine.css";
+/* @import "./rose-pine-moon.css"; */
+/* @import "./rose-pine-dawn.css"; */
+
 * {
   border: none;
   border-radius: 0;
@@ -7,11 +11,11 @@
 }
 
 window#waybar {
-  background-color: #282c34;
-  color: #abb2bf;
+  background-color: @base;
+  color: @pine;
   transition-property: background-color;
   transition-duration: 0.5s;
-  border-bottom: solid 0px #d19a66;
+  border-bottom: solid 0px @overlay;
 }
 
 window#waybar.hidden {
@@ -20,18 +24,18 @@ window#waybar.hidden {
 
 #workspaces button {
   padding: 0 5px;
-  color: #ebdbb2;
+  color: @love;
   border-radius: 5px;
 }
 
 #workspaces button.focused {
-  background-color: #d19a66;
-  color: #282828;
+  background-color: @pine;
+  color: @text;
   border-bottom: none;
 }
 
 #workspaces button.urgent {
-  background-color: #cc241d;
+  background-color: @rose;
 }
 
 widget > * {
@@ -56,8 +60,8 @@ widget > * {
   padding: 0 12px;
   margin-left: 0;
   margin-right: 0;
-  color: #282828;
-  background-color: #d19a66;
+  color: @rose;
+  background-color: @overlay;
 }
 
 .modules-right > widget:first-child > * {
@@ -89,14 +93,14 @@ widget > * {
 }
 
 label:focus {
-  background-color: #282828;
+  background-color: @Overlay;
 }
 
 tooltip {
   border-radius: 5px;
-  background: #d19a66;
+  background: @surface;
 }
 
 tooltip label {
-  color: #282c34;
+  color: @pine;
 }
