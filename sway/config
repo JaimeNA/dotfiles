@@ -269,23 +269,22 @@ font pango:RobotoMonoNerdFont Regular 12
 #
 # Colors
 #
-set $base00 #1e222a
-set $base00 #1b1e23
-set $base01 #353b45
-set $base02 #3e4451
-set $base03 #545862
-set $base04 #565c64
-set $base05 #abb2bf
-set $base06 #b6bdca
-set $base07 #c8ccd4
-set $base08 #e06c75
-set $base09 #d19a66
-set $base0A #e5c07b
-set $base0B #98c379
-set $base0C #56b6c2
-set $base0D #61afef
-set $base0E #c678dd
-set $base0F #be5046
+set $base00 #191724
+set $base01 #1f1d2e
+set $base02 #26233a
+set $base03 #6e6a86
+set $base04 #908caa
+set $base05 #e0def4
+set $base06 #e0def4
+set $base07 #524f67
+set $base08 #eb6f92
+set $base09 #f6c177
+set $base0A #ebbcba
+set $base0B #31748f
+set $base0C #9ccfd8
+set $base0D #c4a7e7
+set $base0E #f6c177
+set $base0F #524f67
 
 # Window Colours
 client.focused   $base0D  $base00  $base06  $base08  $base09
@@ -294,6 +293,9 @@ client.unfocused   $base01  $base00  $base06  $base08  $base02
 client.urgent   $base07  $base00  $base08  $base0B  $base02
 client.placeholder       $base02  $base00  $base06  $base03  $base04
 client.background        $base00
+
+# Window transparency
+for_window [app_id="kitty"] opacity 0.95
 
 #
 # Status Bar:
