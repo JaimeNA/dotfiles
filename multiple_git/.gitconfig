@@ -1,0 +1,11 @@
+[user]
+	email = nam.jaime@gmail.com
+	name = Jaime Nazar Anchorena
+	signingkey = /home/jasha/.ssh/git_personal
+[includeIf "gitdir:~/work_repos/"]
+	path = ~/.gitconfig-work
+
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
