@@ -18,8 +18,7 @@ set $term kitty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu bemenu-run -i -l 20 --fb "#282C34" --ff "#abb2bf" --nb "#282C34" --nf "#abb2bf" --tb "#282C34" --hb "#282C34" --tf "#e06c75" --hf "#e5c07b" --nf "#abb2bf" --af "#abb2bf" --ab "#282C34" --fn "RobotoMono"
-
+set $menu bemenu-run -i -l 20 --fb "#282C34" --ff "#abb2bf" --nb "#282C34" --nf "#abb2bf" --tb "#282C34" --hb "#282C34" --tf "#e06c75" --hf "#e5c07b" --nf "#abb2bf" --af "#abb2bf" --ab "#282C34" --fn "RobotoMono Nerd Font"
 
 ### Startup applications
 exec_always --no-startup-id autotiling
@@ -263,7 +262,7 @@ gaps inner 5
 #
 # Font
 #
-font pango:RobotoMono Regular 12
+font pango:RobotoMono Nerd Font Regular 12
 
 #
 # Colors
