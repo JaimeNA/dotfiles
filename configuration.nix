@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      <home-manager/nixos>
     ];
 
   # Use systemd boot
@@ -34,14 +35,93 @@
   # Set your time zone.
   time.timeZone = "America/Argentina/Buenos_Aires";
 
+  # Shell
+  programs.fish.enable = true;
+
   # Configure user
   users.users.jasha = {
 	isNormalUser = true;
 	description = "jasha";
 	extraGroups = ["wheel" "video"]; # Sudo access and multimedio keyrings
-	shell = pkgs.bash;
+	shell = pkgs.fish;
 	home = "/home/jasha";
 
+  };
+
+  # Home Manager
+  # This saves an extra Nixpkgs evaluation, adds consistency, 
+  # and removes the dependency on NIX_PATH, which is otherwise used for importing Nixpkgs.
+  home-manager.useGlobalPkgs = true;
+
+  # Because I’m not installing it “stand alone”, 
+  # I’m not going to have a home-manager command nor will I have a separate 
+  # ~/.config/home-manager/home.nix file.
+  home-manager.users.jasha = { config, pkgs, ... }: {
+	
+	# Dark theme
+	dconf = {
+	    enable = true;
+	    settings = {
+	      	"org/gnome/desktop/interface" = {
+			color-scheme = "prefer-dark";
+	      	};
+	    };
+	};
+
+	gtk = {
+	      enable = true;
+	      theme = {
+			name = "Adwaita-dark";
+			package = pkgs.gnome-themes-extra;
+	      };
+	};
+
+  	# Home Manager needs a bit of information about you and the
+  	# paths it should manage.
+  	home.username = "jasha";
+  	home.homeDirectory = "/home/jasha";
+
+  	# Packages that should be installed to the user profile.
+  	home.packages = with pkgs; [
+    		git
+    		gimp
+    		imv
+		mpv
+    		cava
+		thunderbird
+		nnn
+		fastfetch
+		bemenu
+		kitty
+		neovim
+		firefox
+		chromium
+		autotiling
+		vesktop
+  	];
+
+  	# This value determines the Home Manager release that your
+  	# configuration is compatible with. This helps avoid breakage
+  	# when a new Home Manager release introduces backwards
+  	# incompatible changes.
+  	#
+  	# You can update Home Manager without changing this value. See
+  	# the Home Manager release notes for a list of state version
+  	# changes in each release.
+  	home.stateVersion = "25.11";
+
+  	# Let Home Manager install and manage itself.
+  	programs.home-manager.enable = true;
+
+  	# Cursor theme
+	home.file.".icons/default".source = "${pkgs.vimix-cursors}/share/icons/Vimix-cursors";	
+  };
+
+  # Also set dark theme for QT
+  qt = {
+	enable = true;
+	platformTheme = "gnome";
+	style = "adwaita-dark";
   };
 
   # Configure network proxy if necessary
@@ -94,20 +174,18 @@
 	wl-clipboard 
 	mako # Notification utility
   	vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+	bluez
   	wget
-  	neovim
-	firefox
-	vesktop
-	thunderbird
-	nnn
-	imv
-	mpv
-	git
-	fastfetch
-	bemenu
-	kitty
-	nerd-fonts
-	nvim
+	rustc
+	cargo
+	gcc
+  ];
+
+  
+  # Fonts
+  fonts.packages = with pkgs; [ 
+    nerd-fonts.roboto-mono
+    nerd-fonts.jetbrains-mono
   ];
 
   # Enables Gnome keyring to store secrets for applications
@@ -140,6 +218,19 @@
 
   # Enable keyrings for audio and video
   programs.light.enable = true;
+
+  # Only allow the unfree packages of steam
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "steam"
+    "steam-unwrapped"
+  ];
+
+  # Enable steam to be installed
+   programs.steam = {
+	enable = true;
+	remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+	dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+   }; 
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
