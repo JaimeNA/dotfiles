@@ -179,6 +179,9 @@
 	rustc
 	cargo
 	gcc
+	gpp
+	cmake
+	gnumake
   ];
 
   
