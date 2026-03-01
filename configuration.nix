@@ -42,7 +42,7 @@
   users.users.jasha = {
 	isNormalUser = true;
 	description = "jasha";
-	extraGroups = ["wheel" "video"]; # Sudo access and multimedio keyrings
+	extraGroups = ["wheel" "libvirtd" "video"]; # Sudo access and multimedio keyrings
 	shell = pkgs.fish;
 	home = "/home/jasha";
 
@@ -98,6 +98,15 @@
 		chromium
 		autotiling
 		vesktop
+		grim
+		qemu
+		quickemu
+		cura-appimage
+		vscodium
+		unzip
+		qbittorrent
+		freecad
+		libreoffice
   	];
 
   	# This value determines the Home Manager release that your
