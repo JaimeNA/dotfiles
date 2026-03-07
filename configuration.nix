@@ -4,11 +4,14 @@
 
 { config, lib, pkgs, ... }:
 
+let
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+in
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      <home-manager/nixos>
+      (import "${home-manager}/nixos")
     ];
 
   # Use systemd boot
@@ -196,7 +199,6 @@
 	gcc
   ];
 
-  
   # Fonts
   fonts.packages = with pkgs; [ 
     nerd-fonts.roboto-mono
