@@ -107,6 +107,12 @@
 		qbittorrent
 		freecad
 		libreoffice
+		zathura
+		usbutils
+		texliveSmall
+		pandoc
+		gnumake
+		screen
   	];
 
   	# This value determines the Home Manager release that your
@@ -188,9 +194,6 @@
 	rustc
 	cargo
 	gcc
-	gpp
-	cmake
-	gnumake
   ];
 
   
@@ -243,6 +246,9 @@
 	remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
 	dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
    }; 
+
+  # Enable USB redirection
+  virtualisation.spiceUSBRedirection.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
