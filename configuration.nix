@@ -103,6 +103,7 @@ in
 		vesktop
 		grim
 		qemu
+		samba
 		quickemu
 		cura-appimage
 		vscodium
