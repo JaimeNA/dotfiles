@@ -45,7 +45,7 @@ in
   users.users.jasha = {
 	isNormalUser = true;
 	description = "jasha";
-	extraGroups = ["wheel" "libvirtd" "video"]; # Sudo access and multimedio keyrings
+	extraGroups = ["wheel" "libvirtd" "video" "wireshark"]; # Sudo access and multimedio keyrings
 	shell = pkgs.fish;
 	home = "/home/jasha";
 
@@ -116,6 +116,7 @@ in
 		pandoc
 		gnumake
 		screen
+		wireshark
   	];
 
   	# This value determines the Home Manager release that your
@@ -251,6 +252,11 @@ in
 
   # Enable USB redirection
   virtualisation.spiceUSBRedirection.enable = true;
+
+  # Enable wireshark
+  programs.wireshark.enable = true;
+  programs.wireshark.dumpcap.enable = true;
+  programs.wireshark.usbmon.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
