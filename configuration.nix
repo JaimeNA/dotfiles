@@ -117,6 +117,7 @@ in
 		gnumake
 		screen
 		wireshark
+		cmake
   	];
 
   	# This value determines the Home Manager release that your
