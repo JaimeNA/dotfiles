@@ -127,6 +127,7 @@ in
 		wireshark
 		kdePackages.kdenlive
 		restic
+		cmake
   	];
 
   	# This value determines the Home Manager release that your
