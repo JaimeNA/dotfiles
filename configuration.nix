@@ -5,7 +5,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz";
 in
 {
   imports =
@@ -30,6 +30,14 @@ in
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  # https://nixos.wiki/wiki/OBS_Studio
+  boot.extraModulePackages = with config.boot.kernelPackages; [
+    v4l2loopback
+  ];
+  boot.extraModprobeConfig = ''
+    options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+  '';
+
   networking.hostName = "jasha-desktop"; # Define your hostname.
 
   # Configure network connections interactively with nmcli or nmtui.
@@ -45,7 +53,7 @@ in
   users.users.jasha = {
 	isNormalUser = true;
 	description = "jasha";
-	extraGroups = ["wheel" "libvirtd" "video" "wireshark"]; # Sudo access and multimedio keyrings
+	extraGroups = ["wheel" "libvirtd" "video" "wireshark" "docker"]; # Sudo access and multimedio keyrings
 	shell = pkgs.fish;
 	home = "/home/jasha";
 
@@ -117,6 +125,8 @@ in
 		gnumake
 		screen
 		wireshark
+		kdePackages.kdenlive
+		restic
   	];
 
   	# This value determines the Home Manager release that your
@@ -135,6 +145,29 @@ in
   	# Cursor theme
 	home.file.".icons/default".source = "${pkgs.vimix-cursors}/share/icons/Vimix-cursors";	
   };
+
+  # Postgresql
+  #services.postgresql = {
+  #  enable = true;
+  #  ensureDatabases = [ "mydatabase" ];
+  #  enableTCPIP = true;
+  #  # port = 5432;
+  #  authentication = pkgs.lib.mkOverride 10 ''
+  #    #type database DBuser origin-address auth-method
+  #    local all      all     trust
+  #    # ... other auth rules ...
+  #
+  #    # ipv4
+  #    host  all      all     127.0.0.1/32   trust
+  #    # ipv6
+  #    host  all      all     ::1/128        trust
+  #  '';
+  #  initialScript = pkgs.writeText "backend-initScript" ''
+  #    CREATE ROLE postgres WITH LOGIN PASSWORD 'postgres' CREATEDB;
+  #    CREATE DATABASE paw;
+  #    GRANT ALL PRIVILEGES ON DATABASE paw TO postgres;
+  #  '';
+  #};
 
   # Also set dark theme for QT
   qt = {
@@ -280,6 +313,10 @@ in
   programs.wireshark.enable = true;
   programs.wireshark.dumpcap.enable = true;
   programs.wireshark.usbmon.enable = true;
+
+  # Enable docker
+  virtualisation.docker.package = pkgs.docker_29;
+  virtualisation.docker.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
